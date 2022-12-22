@@ -60,7 +60,8 @@ $arrBlog = getRaw("select * from blog limit $index,$perPage");
                     </div>
                     <div class="blog-bottom">
                         <div class="blog-inner">
-                            <h4><a href="blog-single.html"><?php echo html_entity_decode($value['title']) ?></a>
+                            <h4><a
+                                    href="<?php echo _WEB_HOST_ROOT.'/?module=blog&action=detail&id='.$value['id'] ?>"><?php echo html_entity_decode($value['title']) ?></a>
                             </h4>
                             <p><?php echo html_entity_decode($value['content']) ?></p>
                             <div class="meta">

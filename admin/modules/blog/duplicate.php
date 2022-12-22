@@ -35,6 +35,7 @@ if (isGet()) {
                 $cateDetail['title'] .= " ($dup)";
             }
 
+            $cateDetail['user_id'] = isLogin()['user_id'];
             $cateDetail['duplicate']+=1;
             unset($cateDetail['id']);
             $cateDetail['update_at'] = date("Y-m-d H:i:s");

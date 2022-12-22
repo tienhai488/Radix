@@ -163,28 +163,41 @@
                         <div class="mainmenu">
                             <nav class="navigation">
                                 <ul class="nav menu">
-                                    <li class="active"><a href="<?php echo _WEB_HOST_ROOT ?>">Home</a></li>
-                                    <li><a href="#">Pages<i class="fa fa-caret-down"></i></a>
+                                    <li class="<?php echo empty(getBody()['module']) ? "active" : false ?>"><a
+                                            href="<?php echo _WEB_HOST_ROOT ?>">Home</a></li>
+                                    <li
+                                        class="<?php echo !empty(getBody()['module'])&&getBody()['module'] =='page-template' ? "active" : false ?>">
+                                        <a href="#">Pages<i class="fa fa-caret-down"></i></a>
                                         <ul class="dropdown">
                                             <li><a
                                                     href="<?php echo _WEB_HOST_ROOT.'?module=page-template&action=about-us' ?>">About
                                                     Us</a></li>
                                             <li><a
                                                     href="<?php echo _WEB_HOST_ROOT.'?module=page-template&action=our-team' ?>">Our
-                                                    Team</a></li>
+                                                    Team</a>
+                                            </li>
                                         </ul>
                                     </li>
-                                    <li><a href="<?php echo _WEB_HOST_ROOT.'?module=service' ?>">Services</a>
+                                    <li
+                                        class="<?php echo !empty(getBody()['module'])&&getBody()['module'] =='service' ? "active" : false ?>">
+                                        <a href="<?php echo _WEB_HOST_ROOT.'?module=service' ?>">Services</a>
                                     </li>
-                                    <li><a href="<?php echo _WEB_HOST_ROOT.'?module=portfolio' ?>">Portfolio</a></li>
-                                    <li><a href="#">Blogs<i class="fa fa-caret-down"></i></a>
+                                    <li
+                                        class="<?php echo !empty(getBody()['module'])&&getBody()['module'] =='portfolio' ? "active" : false ?>">
+                                        <a href="<?php echo _WEB_HOST_ROOT.'?module=portfolio' ?>">Portfolio</a>
+                                    </li>
+                                    <li
+                                        class="<?php echo !empty(getBody()['module'])&&getBody()['module'] =='blog' ? "active" : false ?>">
+                                        <a href="#">Blogs<i class="fa fa-caret-down"></i></a>
                                         <ul class="dropdown">
                                             <li><a href="<?php echo _WEB_HOST_ROOT.'?module=blog' ?>">Blog layout</a>
                                             </li>
                                             <li><a href="blog-single.html">Blog Single</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li
+                                        class="<?php echo !empty(getBody()['module'])&&getBody()['module'] =='contact' ? "active" : false ?>">
+                                        <a href="contact.html">Contact</a></li>
                                 </ul>
                             </nav>
                             <!-- Button -->
