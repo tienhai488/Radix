@@ -1,44 +1,19 @@
 <?php
 if (!defined('_INCODE')) die('Access Deined...');
-$dataPortfolio = firstRaw("select opt_value from options where opt_key = 'general_blog'");
-$dataPortfolio = reset($dataPortfolio);
-$dataPortfolio = json_decode($dataPortfolio, true);
+$dataContact = firstRaw("select opt_value from options where opt_key = 'general_contact'");
+$dataContact = reset($dataContact);
+$dataContact = json_decode($dataContact, true);
 
 // echo "<pre>";
-// print_r($dataPortfolio);
+// print_r($dataContact);
 // echo "</pre>";
 
-if (!empty(getBody()['page'])) {
-    $page = getBody()['page'];
-} else {
-    $page = 1;
-}
-
-// $temp = $keyword;
-// str_replace(" ","+",$temp);
-// $queryStr = "keyword=$temp";
-
-$perPage = 3;
-// so dong hien thi tren mot trang
-$rows = getRows("select id from `blog`");
-
-$maxpage = ceil($rows / $perPage);
-
-
-if ($page < 1 || $page > $maxpage) {
-    $page = 1;
-}
-
-$index = ($page - 1) * $perPage;
-
-$pagePortfolio = true;
 $data = [
-    "pageTitle" =>  !empty($dataPortfolio['title_blog']) ? $dataPortfolio['title_blog'] : "Dự án",
+    "pageTitle" =>  !empty($dataContact['title_contact']) ? $dataContact['title_contact'] : "Contact",
 ];
 layout("header", "client", $data);
 layout("breadcrumb", "client", $data);
 
-$arrBlog = getRaw("select * from blog limit $index,$perPage");
 
 ?>
 
@@ -48,10 +23,9 @@ $arrBlog = getRaw("select * from blog limit $index,$perPage");
         <div class="row">
             <div class="col-12">
                 <div class="section-title">
-                    <span class="title-bg">Radix</span>
-                    <h1>Contact Us</h1>
-                    <p>contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
-                        classical Latin literature from 45 BC, making it over 2000 years old
+                    <span class="title-bg"><?php echo html_entity_decode($dataContact['title_bg']) ?></span>
+                    <h1><?php echo html_entity_decode($dataContact['heading']) ?></h1>
+                    <p><?php echo html_entity_decode($dataContact['description']) ?>
                     <p>
                 </div>
             </div>
@@ -113,22 +87,29 @@ $arrBlog = getRaw("select * from blog limit $index,$perPage");
                                 <div class="contact">
                                     <h2>Our Contact Address</h2>
                                     <ul class="address">
-                                        <li><i class="fa fa-paper-plane"></i><span>Address: </span> Road no 3, Block-D,
-                                            Khilgaon 1200, Dhaka Bangladesh</li>
-                                        <li><i class="fa fa-phone"></i><span>Phone: </span>+(123) 31222183</li>
+                                        <li><i class="fa fa-paper-plane"></i><span>Address:
+                                            </span><?php echo getValueOptions("general_address") ?></li>
+                                        <li><i class="fa fa-phone"></i><span>Phone:
+                                            </span><?php echo getValueOptions("general_hotline") ?></li>
                                         <li class="email"><i class="fa fa-envelope"></i><span>Email: </span><a
-                                                href="mailto:info@youremail.com">info@youremail.com</a></li>
+                                                href="mailto:<?php echo getValueOptions("general_email") ?>"><?php echo getValueOptions("general_email") ?></a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <!--/ End Address -->
                                 <!-- Social -->
                                 <ul class="social">
-                                    <li class="active"><a href="#"><i class="fa fa-facebook"></i>Like Us facebook</a>
+                                    <li class="active"><a href="<?php echo getValueOptions("general_facebook") ?>"><i
+                                                class="fa fa-facebook"></i>Like Us facebook</a>
                                     </li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i>Follow Us twitter</a></li>
-                                    <li><a href="#"><i class="fa fa-google-plus"></i>Follow Us google-plus</a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin"></i>Follow Us linkedin</a></li>
-                                    <li><a href="#"><i class="fa fa-behance"></i>Follow Us behance</a></li>
+                                    <li><a href="<?php echo getValueOptions("general_twitter") ?>"><i
+                                                class="fa fa-twitter"></i>Follow Us twitter</a></li>
+                                    <li><a href="<?php echo getValueOptions("general_linkedin") ?>"><i
+                                                class="fa fa-linkedin"></i>Follow Us linkedin</a></li>
+                                    <li><a href="<?php echo getValueOptions("general_github") ?>"><i
+                                                class="fa fa-github"></i>Follow Us linkedin</a></li>
+                                    <li><a href="<?php echo getValueOptions("general_youtube") ?>"><i
+                                                class="fa fa-youtube"></i>Follow Us linkedin</a></li>
                                 </ul>
                                 <!--/ End Social -->
                             </div>
