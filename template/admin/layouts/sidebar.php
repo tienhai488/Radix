@@ -300,6 +300,13 @@
                             </a>
                         </li>
                         <li class="nav-item ">
+                            <a href="<?php echo _WEB_HOST_ROOT_ADMIN.'/?module=options&action=contact' ?>"
+                                class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thiết lập Contact</p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
                             <a href="<?php echo _WEB_HOST_ROOT_ADMIN.'/?module=options&action=partner' ?>"
                                 class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
@@ -318,7 +325,7 @@
                     <a href="#" class="nav-link <?php echo getActiveSidebar('contacts')?'active':false ?>">
                         <i class="nav-icon fas fa-phone-alt"></i>
                         <p>
-                            <p>Quản lý liên hệ <span class="badge badge-danger"><?php echo $countContact ?></span></p>
+                            <p>Quản lý liên hệ <span class="badge badge-danger"></span></p>
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -335,6 +342,28 @@
                                 <p>Liên hệ phòng ban</p>
                             </a>
                         </li>
+
+                    </ul>
+                </li>
+                <?php 
+                $countComment = getRows("select * from comments");
+                ?>
+                <li class="nav-item has-treeview <?php echo getActiveSidebar('comments')?'menu-open':false ?>">
+                    <a href="#" class="nav-link <?php echo getActiveSidebar('comments')?'active':false ?>">
+                        <i class="nav-icon fas fa-comments"></i>
+                        <p>
+                            <p>Quản lý bình luận <span class="badge badge-danger"></span></p>
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?php echo _WEB_HOST_ROOT_ADMIN.'/?module=comments' ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách <span class="badge badge-danger"><?php echo $countComment ?></span></p>
+                            </a>
+                        </li>
+
 
                     </ul>
                 </li>

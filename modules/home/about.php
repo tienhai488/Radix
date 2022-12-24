@@ -6,7 +6,7 @@ $data = [
 layout("header", "client", $data);
 
 
-$dataAbout = firstRaw("select opt_value from options where opt_key = 'general_contact'");
+$dataAbout = firstRaw("select opt_value from options where opt_key = 'general_about'");
 $dataAbout = reset($dataAbout);
 $dataAbout = json_decode($dataAbout, true);
 

@@ -10,7 +10,7 @@ layout("sidebar", "admin", $data);
 layout("breadcrumb", "admin", $data);
 
 if (isGet()) {
-    $data = getValueOptions("general_contact");
+    $data = getValueOptions("general_about");
     echo $data;
     if (empty($data)) {
         $data = [];
@@ -39,7 +39,7 @@ if (isPost()) {
 
     $dataUpdate = ['opt_value'=>$data];
 
-    $result = update("options", $dataUpdate ,'opt_key = "general_contact"');
+    $result = update("options", $dataUpdate ,'opt_key = "general_about"');
     if ($result) {
         setFlashData("msg", "Thiết lập thông tin thành công!");
         setFlashData("msg_type", "success");

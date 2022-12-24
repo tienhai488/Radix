@@ -192,12 +192,12 @@
                                         <ul class="dropdown">
                                             <li><a href="<?php echo _WEB_HOST_ROOT.'?module=blog' ?>">Blog layout</a>
                                             </li>
-                                            <li><a href="blog-single.html">Blog Single</a></li>
                                         </ul>
                                     </li>
                                     <li
                                         class="<?php echo !empty(getBody()['module'])&&getBody()['module'] =='contact' ? "active" : false ?>">
-                                        <a href="contact.html">Contact</a></li>
+                                        <a href="<?php echo _WEB_HOST_ROOT.'?module=contact' ?>">Contact</a>
+                                    </li>
                                 </ul>
                             </nav>
                             <!-- Button -->

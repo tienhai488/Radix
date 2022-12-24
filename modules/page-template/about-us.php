@@ -1,6 +1,6 @@
 <?php
 if (!defined('_INCODE')) die('Access Deined...');
-$dataAbout = firstRaw("select opt_value from options where opt_key = 'general_contact'");
+$dataAbout = firstRaw("select opt_value from options where opt_key = 'general_about'");
 $dataAbout = reset($dataAbout);
 $dataAbout = json_decode($dataAbout, true);
 

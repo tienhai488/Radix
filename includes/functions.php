@@ -367,3 +367,70 @@ function getYoutubeId($url){
     }
     return false;
 }
+
+function getReplayComment($id,$blog_id){
+    $dataSub = getRaw("select * from comments where  parent_id = $id and status = 1 order by create_at");
+    
+    if(!empty($dataSub)):
+        foreach ($dataSub as $key => $value) {
+        ?>
+<div class="comment-list" style="width:auto">
+    <div class="main">
+        <div class="head" style="width:auto">
+            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="#">
+        </div>
+        <div class="body">
+            <h4><?php echo $value['name'] ?><span class="badge badge-danger"><?php
+                    if(!empty($value['user_id'])){
+                        $dataGroup = firstRaw("select name from groups where id = ".$value['user_id']);
+                        echo reset($dataGroup);
+                    }
+                    ?></span></h4>
+            <div class="comment-info">
+                <p><span><?php echo getDateFormat($value['create_at'],'m-Y') ?> at<i
+                            class="fa fa-clock-o"></i><?php echo getDateFormat($value['create_at'],'H:i') ?>,</span><a
+                        href="<?php echo _WEB_HOST_ROOT.'?module=blog&action=detail&id='.$blog_id.'&replay-id='.$value['id'] ?>"><i
+                            class="fa fa-comment-o"></i>Trả lời</a></p>
+            </div>
+            <p><?php echo $value['content'] ?></p>
+        </div>
+    </div>
+    <?php getReplayComment($value['id'],$blog_id); ?>
+</div>
+<?php
+        }
+    endif;
+    
+}
+
+
+function countCommnent($arrId = [],$result=0){
+    if(!empty($arrId)){
+        foreach ($arrId as $key => $value) {
+            $id = $value['id'];
+            $arrTemp = getRaw("select id from comments where parent_id = $id and status = 1");
+            if(!empty($arrTemp)){
+                $result += count($arrTemp);
+                return countCommnent($arrTemp,$result);
+            }
+        }
+    }
+    return $result;
+}
+
+function deleteComment($arrId){
+    if(!empty($arrId)){
+        $arrTemp = [];
+        foreach ($arrId as $key => $value) {
+          $arrTemp[] = $value['id'];
+        }
+        $strSql = implode(",",$arrTemp);
+        delete("comments","id in ($strSql)");
+        foreach ($arrTemp as $key => $value) {
+            $arrId = getRaw("select id from comments where parent_id = $value");
+            deleteComment($arrId);
+        }
+    }
+
+  
+}

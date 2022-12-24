@@ -10,6 +10,21 @@ if(empty(getBody()['id'])){
         loadErr();
     }
 }
+
+
+
+if(!empty(getBody()['replay-id'])){
+    $replay_id = getBody()['replay-id'];
+    $nn = getRows('select * from comments where id = '.$replay_id);
+    if($nn == 0){
+        loadErr();
+    }
+    $dataReplay = firstRaw("select * from `comments` where id = $replay_id");
+    // echo "<pre>";
+    // print_r($dataReplay);
+    // echo "</pre>";
+    // $nameReplay = $dataReplay['name'];
+}
 $dataBlog = firstRaw("select opt_value from options where opt_key = 'general_blog'");
 $dataBlog = reset($dataBlog);
 $dataBlog = json_decode($dataBlog, true);
@@ -120,7 +135,7 @@ $n_post = getRows('select id from blog where user_id = '.$idUser);
                     <div class="col-12">
                         <div class="author-details">
                             <div class="author-left">
-                                <img src="<?php echo _WEB_HOST_TEMPLATE ?>/images/t4.jpg" alt="#">
+                                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="#">
                                 <h4><?php echo $dataUser['fullname'] ?><span>Senior Author</span></h4>
                                 <p><a href="#"><i class="fa fa-pencil"></i><?php echo $n_post ?> posts</a></p>
                             </div>
@@ -140,119 +155,11 @@ $n_post = getRows('select id from blog where user_id = '.$idUser);
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="blog-comments">
-                            <h2 class="title">37 Comments Found!</h2>
-                            <div class="comments-body">
-                                <!-- Single Comments -->
-                                <div class="single-comments">
-                                    <div class="main">
-                                        <div class="head">
-                                            <img src="<?php echo _WEB_HOST_TEMPLATE ?>/images/client1.jpg" alt="#">
-                                        </div>
-                                        <div class="body">
-                                            <h4>Lufia Roshan</h4>
-                                            <div class="comment-info">
-                                                <p><span>03 May, 2018 at<i class="fa fa-clock-o"></i>12:20PM,</span><a
-                                                        href="#"><i class="fa fa-comment-o"></i>replay</a></p>
-                                            </div>
-                                            <p>some form, by injected humour, or randomised words Mirum est notare quam
-                                                littera gothica, quam nunc putamus parum claram, anteposuerit litterarum
-                                                formas</p>
-                                        </div>
-                                    </div>
-                                    <div class="comment-list">
-                                        <div class="head">
-                                            <img src="<?php echo _WEB_HOST_TEMPLATE ?>/images/client2.jpg" alt="#">
-                                        </div>
-                                        <div class="body">
-                                            <h4>Josep Bambo</h4>
-                                            <div class="comment-info">
-                                                <p><span>03 May, 2018 at<i class="fa fa-clock-o"></i>12:40PM,</span><a
-                                                        href="#"><i class="fa fa-comment-o"></i>replay</a></p>
-                                            </div>
-                                            <p>sagittis ex consectetur sed. Ut viverra elementum libero, nec tincidunt
-                                                orci vehicula quis</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/ End Single Comments -->
-                                <!-- Single Comments -->
-                                <div class="single-comments">
-                                    <div class="main">
-                                        <div class="head">
-                                            <img src="<?php echo _WEB_HOST_TEMPLATE ?>/images/client3.jpg" alt="#">
-                                        </div>
-                                        <div class="body">
-                                            <h4>Trolia Ula</h4>
-                                            <div class="comment-info">
-                                                <p><span>05 May, 2018 at<i class="fa fa-clock-o"></i>08:00AM,</span><a
-                                                        href="#"><i class="fa fa-comment-o"></i>replay</a></p>
-                                            </div>
-                                            <p>Lorem Ipsum available, but the majority have suffered alteration in some
-                                                form, by injected humour, or randomised words Mirum est notare quam
-                                                littera gothica</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/ End Single Comments -->
-                                <!-- Single Comments -->
-                                <div class="single-comments">
-                                    <div class="main">
-                                        <div class="head">
-                                            <img src="<?php echo _WEB_HOST_TEMPLATE ?>/images/client4.jpg" alt="#">
-                                        </div>
-                                        <div class="body">
-                                            <h4>James Romans</h4>
-                                            <div class="comment-info">
-                                                <p><span>06 May, 2018 at<i class="fa fa-clock-o"></i>02:00PM,</span><a
-                                                        href="#"><i class="fa fa-comment-o"></i>replay</a></p>
-                                            </div>
-                                            <p>Lorem Ipsum available, but the majority have suffered alteration in some
-                                                form, by injected humour, or randomised words Mirum est notare quam</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/ End Single Comments -->
-                            </div>
-                        </div>
+
+                        <?php require_once _WEB_PATH_ROOT.'/modules/blog/comment.php' ?>
                     </div>
                     <div class="col-12">
-                        <div class="comments-form">
-                            <h2 class="title">Leave a comment</h2>
-                            <!-- Contact Form -->
-                            <form class="form" method="post" action="mail/mail.php">
-                                <div class="row">
-                                    <div class="col-lg-4 col-12">
-                                        <div class="form-group">
-                                            <input type="text" name="name" placeholder="Full Name" required="required">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-12">
-                                        <div class="form-group">
-                                            <input type="email" name="email" placeholder="Your Email"
-                                                required="required">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-12">
-                                        <div class="form-group">
-                                            <input type="url" name="website" placeholder="Website" required="required">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <textarea name="message" rows="5"
-                                                placeholder="Type Your Message Here"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group button">
-                                            <button type="submit" class="btn primary">Submit Comment</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <!--/ End Contact Form -->
-                        </div>
+                        <?php require_once _WEB_PATH_ROOT.'/modules/blog/form-comment.php' ?>
                     </div>
                 </div>
             </div>
