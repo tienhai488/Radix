@@ -7,7 +7,7 @@ Dưới đây là một số ngôn ngữ lập trình và kỹ năng mà tôi đ
 - **Ngôn ngữ lập trình:**
   - PHP
   - JavaScript
-  - 
+    
 - **Front-end:**
   - HTML
   - CSS
