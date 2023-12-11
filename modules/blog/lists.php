@@ -7,15 +7,6 @@ $dataPortfolio = json_decode($dataPortfolio, true);
 // echo "<pre>";
 // print_r($dataPortfolio);
 // echo "</pre>";
-
-if (!empty(getBody()['page'])) {
-    $page = getBody()['page'];
-} else {
-    $page = 1;
-}
-
-// $temp = $keyword;
-// str_replace(" ","+",$temp);
 // $queryStr = "keyword=$temp";
 
 $perPage = 3;
@@ -26,6 +17,15 @@ $maxpage = ceil($rows / $perPage);
 
 
 if ($page < 1 || $page > $maxpage) {
+
+if (!empty(getBody()['page'])) {
+    $page = getBody()['page'];
+} else {
+    $page = 1;
+}
+
+// $temp = $keyword;
+// str_replace(" ","+",$temp);
     $page = 1;
 }
 

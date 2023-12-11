@@ -106,58 +106,64 @@ echo "</pre>";
     <?php
         getMsg($msg,$msg_type); 
         ?>
-    <form  method="POST">
+    <form method="POST">
         <div class="row">
             <div class="col-6 form-group">
                 <label for="">Họ tên</label>
                 <br>
-                <input class="form-control" type="text" name="name" placeholder="Nhập họ tên" value="<?php getValueInput($data, 'name') ?>">
+                <input class="form-control" type="text" name="name" placeholder="Nhập họ tên"
+                    value="<?php getValueInput($data, 'name') ?>">
                 <?php getMsgErr($errs, 'name') ?>
             </div>
             <br>
             <div class="col-6 form-group">
-            <label for="">Mật khẩu</label>
-        <br>
-        <input class="form-control" type="password" name="password" placeholder="Nhập mật khẩu" value="<?php getValueInput($data, 'password') ?>">
-        <?php getMsgErr($errs, 'password') ?>
-    </div>
-    <div class="col-6 form-group">
-        <label for="">Nhóm người dùng</label>
-        <br>
-        <select class="form-control" name="group_id" id="">
-            <option value="0">Chọn nhóm người dùng</option>
-            <?php 
+                <label for="">Mật khẩu</label>
+                <br>
+                <input class="form-control" type="password" name="password" placeholder="Nhập mật khẩu"
+                    value="<?php getValueInput($data, 'password') ?>">
+                <?php getMsgErr($errs, 'password') ?>
+            </div>
+            <div class="col-6 form-group">
+                <label for="">Nhóm người dùng</label>
+                <br>
+                <select class="form-control" name="group_id" id="">
+                    <option value="0">Chọn nhóm người dùng</option>
+                    <?php 
                 $groups = getRaw("select id,name from `groups`");
                 foreach ($groups as $item) {
                     ?>
-                    <option <?php echo !empty($data) && $data['group_id'] == $item['id'] ? "selected" : False ?> value="<?php echo $item['id'] ?>" ><?php echo $item['name'] ?></option>
+                    <option <?php echo !empty($data) && $data['group_id'] == $item['id'] ? "selected" : False ?>
+                        value="<?php echo $item['id'] ?>"><?php echo $item['name'] ?></option>
                     <?php
                 }
                 ?>
-            </select>
-            <?php getMsgErr($errs, 'group_id') ?>
-        </div>
-        <div class="col-6 form-group">
-            <label for="">Nhập lại mật khẩu</label>
-            <br>
-            <input class="form-control" type="password" name="repeat_password" placeholder="Nhập lại mật khẩu" value="<?php getValueInput($data, 'repeat_password') ?>">
-            <?php getMsgErr($errs, 'repeat_password') ?>
-        </div>
-        <div class="col-6 form-group">
-            <label for="">Email</label>
-            <br>
-            <input class="form-control" type="text" name="email" placeholder="Nhập email..." value="<?php getValueInput($data, 'email') ?>">
-            <?php getMsgErr($errs, 'email') ?>
-        </div>
-        <div class="col-6 form-group">
-            <label for="">Trạng thái người dùng</label>
-        <br>
-            <select class="form-control" name="status" id="">
-                <option value="0" <?php echo !empty($data) && $data['status'] == 0 ? "selected" : False ?>>Chưa kích hoạt
-                </option>
-                <option value="1" <?php echo !empty($data) && $data['status'] == 1 ? "selected" : False ?>>Kích hoạt
-                </option>
-            </select>
+                </select>
+                <?php getMsgErr($errs, 'group_id') ?>
+            </div>
+            <div class="col-6 form-group">
+                <label for="">Nhập lại mật khẩu</label>
+                <br>
+                <input class="form-control" type="password" name="repeat_password" placeholder="Nhập lại mật khẩu"
+                    value="<?php getValueInput($data, 'repeat_password') ?>">
+                <?php getMsgErr($errs, 'repeat_password') ?>
+            </div>
+            <div class="col-6 form-group">
+                <label for="">Email</label>
+                <br>
+                <input class="form-control" type="text" name="email" placeholder="Nhập email..."
+                    value="<?php getValueInput($data, 'email') ?>">
+                <?php getMsgErr($errs, 'email') ?>
+            </div>
+            <div class="col-6 form-group">
+                <label for="">Trạng thái người dùng</label>
+                <br>
+                <select class="form-control" name="status" id="">
+                    <option value="0" <?php echo !empty($data) && $data['status'] == 0 ? "selected" : False ?>>Chưa kích
+                        hoạt
+                    </option>
+                    <option value="1" <?php echo !empty($data) && $data['status'] == 1 ? "selected" : False ?>>Kích hoạt
+                    </option>
+                </select>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Thêm người dùng</button>

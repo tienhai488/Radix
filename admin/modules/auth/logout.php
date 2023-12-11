@@ -11,7 +11,7 @@ if (isLogin()){
     delete('login_token', "token='$token'");
     removeSession('login_token');
     if(empty($_SERVER['HTTP_REFERER'])){
-        redirect(getLinkAdmin('auth','login'));
+        redirect(getLinkAdmin("dashboard"));
     }else {
         redirect($_SERVER['HTTP_REFERER']);
     }

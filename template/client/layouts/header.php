@@ -119,7 +119,7 @@
                             <div class="search-form active">
                                 <a class="icon" href="#"><i class="fa fa-search"></i></a>
                                 <form class="form" action="#">
-                                    <input placeholder="Search & Enter" type="search">
+                                    <input placeholder="Tìm kiếm blog..." type="search">
                                 </form>
                             </div>
                             <!--/ End Search Form -->
@@ -202,7 +202,7 @@
                             </nav>
                             <!-- Button -->
                             <div class="button">
-                                <a href="contact.html" class="btn">Get a quote</a>
+                                <a href="<?php echo _WEB_HOST_ROOT ?>/?module=contact" class="btn">Nhận Báo Giá</a>
                             </div>
                             <!--/ End Button -->
                         </div>

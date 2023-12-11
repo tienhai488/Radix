@@ -53,26 +53,29 @@ $msg_type = getFlashData('msg_type');
 
 ?>
 
-    <section class="content">
-        <div class="container-fluid">
-            <?php
+<section class="content">
+    <div class="container-fluid">
+        <?php
             getMsg($msg,$msg_type); 
             ?>
-            <a href="<?php echo getLinkAdmin('groups','add') ?>" class="btn btn-primary"><i class="fa fa-plus"></i>Thêm nhóm mới</a>
-            <hr>
-            <form action="" method="GET">
-                <div class="row">
-                    <input type="hidden" name="module" value="groups">
-                    <div class="col-9">
-                        <input type="search" class="form-control" name="keyword" placeholder="Nhập vào tên nhóm cần tìm kiếm.." value="<?php echo !empty($keywordSql) ? $keywordSql : false ?>">
-                    </div>
-                    <div class="col-3">
-                         <button type="submit" class="btn btn-primary btn-block">Tìm kiếm</button>
-                    </div>
+        <a href="<?php echo getLinkAdmin('groups','add') ?>" class="btn btn-primary"><i class="fa fa-plus"></i>Thêm nhóm
+            mới</a>
+        <hr>
+        <form action="" method="GET">
+            <div class="row">
+                <input type="hidden" name="module" value="groups">
+                <div class="col-9">
+                    <input type="search" class="form-control" name="keyword"
+                        placeholder="Nhập vào tên nhóm cần tìm kiếm.."
+                        value="<?php echo !empty($keywordSql) ? $keywordSql : false ?>">
                 </div>
-            </form>
-            <hr>
-           <table class="table table-bordered">
+                <div class="col-3">
+                    <button type="submit" class="btn btn-primary btn-block">Tìm kiếm</button>
+                </div>
+            </div>
+        </form>
+        <hr>
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th class="text-center" width="5%">STT</th>
@@ -84,7 +87,7 @@ $msg_type = getFlashData('msg_type');
                 </tr>
             </thead>
             <tbody>
-            <?php
+                <?php
                 $index = ($page - 1) * $perPage;
                 $groups = getRaw("select * from `groups` $filter ORDER BY update_at desc limit $index,$perPage");
                 
@@ -99,13 +102,18 @@ $msg_type = getFlashData('msg_type');
             ?>
                 <tr>
                     <td class="text-center"><?php echo $index ?></td>
-                    <td class="text-center"><a href="<?php echo getLinkAdmin('groups','update',['id'=>$id]) ?>" > <?php echo $name ?></a></td></td>
+                    <td class="text-center"><a href="<?php echo getLinkAdmin('groups','update',['id'=>$id]) ?>">
+                            <?php echo $name ?></a></td>
+                    </td>
                     <td class="text-center"><?php echo $create_at ?></td>
                     <td class="text-center"><a href="" class="btn btn-primary btn-sm">Phân quyền</a></td>
-                    <td class="text-center"><a href="<?php echo getLinkAdmin('groups','update',['id'=>$id]) ?>" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Sửa</a></td>
-                    <td class="text-center"><a href="<?php echo getLinkAdmin('groups','delete',['id'=>$id]) ?>" onclick="return confirm('Bạn có thật sự muốn xóa!') " class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Xóa</a></td>
+                    <td class="text-center"><a href="<?php echo getLinkAdmin('groups','update',['id'=>$id]) ?>"
+                            class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Sửa</a></td>
+                    <td class="text-center"><a href="<?php echo getLinkAdmin('groups','delete',['id'=>$id]) ?>"
+                            onclick="return confirm('Bạn có thật sự muốn xóa!') " class="btn btn-danger btn-sm"><i
+                                class="fa fa-trash"></i> Xóa</a></td>
                 </tr>
-            <?php 
+                <?php 
                 }
                 if($n == 0){
                     if ($n == 0) {
@@ -115,16 +123,17 @@ $msg_type = getFlashData('msg_type');
                 }
             ?>
             </tbody>
-           </table>
+        </table>
 
-           <br>
+        <br>
 
-           <nav aria-label="Page navigation example" class="d-flex justify-content-end" style="display: <?php echo $rows > 0 ? "block" : "none" ?>;">
-        <ul class="pagination pagination-sm">
-            <li class="page-item"><a class="page-link"
-                    href="?module=groups&<?php echo $queryStr ?>&page=<?php echo $page > 1 ? $page -= 1 : $page ?>">Previous</a>
-            </li>
-            <?php
+        <nav aria-label="Page navigation example" class="d-flex justify-content-end"
+            style="display: <?php echo $rows > 0 ? "block" : "none" ?>;">
+            <ul class="pagination pagination-sm">
+                <li class="page-item"><a class="page-link"
+                        href="?module=groups&<?php echo $queryStr ?>&page=<?php echo $page > 1 ? $page -= 1 : $page ?>">Previous</a>
+                </li>
+                <?php
             $start = $page - 2;
             if ($start < 1) {
                 $start = 1;
@@ -141,28 +150,28 @@ $msg_type = getFlashData('msg_type');
                 $link = _WEB_HOST_ROOT_ADMIN."/?module=groups&$queryStr&page=$i";
 
             ?>
-            <li class='<?php
+                <li class='<?php
                             $active = 1;
                             if (!empty(getBody()['page'])) {
                                 $active = getBody()['page'];
                             }
                             echo $active == $i ? 'page-item active' : 'page-item' ?>'><a class="page-link"
-                    href="<?php echo $link ?>"> <?php echo $i ?></a>
-            </li>
-            <?php
+                        href="<?php echo $link ?>"> <?php echo $i ?></a>
+                </li>
+                <?php
             }
             ?>
-            <li class="page-item"><a class="page-link"
-                    href="?module=groups&<?php echo $queryStr ?>&page=<?php $index =  empty(getBody()['page']) ? 2 : getBody()['page'] + 1;
+                <li class="page-item"><a class="page-link"
+                        href="?module=groups&<?php echo $queryStr ?>&page=<?php $index =  empty(getBody()['page']) ? 2 : getBody()['page'] + 1;
                                                                                             echo ($index > $maxpage) ? $maxpage : $index; ?>">Next</a>
-            </li>
-        </ul>
-    </nav>
+                </li>
+            </ul>
+        </nav>
 
-        </div>
-    </section>
-    <!-- /.content -->
-  
+    </div>
+</section>
+<!-- /.content -->
+
 <?php
 layout('footer','admin',$data);
 ?>

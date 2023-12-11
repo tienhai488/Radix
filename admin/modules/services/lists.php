@@ -150,7 +150,7 @@ $msg_type = getFlashData('msg_type');
                     <!-- <td class="text-center">
                         <i class="fas fa-viruses"></i>
                     </td> -->
-                    <td class="text-center"><?php echo checkIcon($icon) ? "$icon" : "<img src='$icon' width='80' /> " ?>
+                    <td class="text-center"><?php echo checkIcon($icon) ? "$icon" : "<img src='$icon' width='60' /> " ?>
                     </td>
 
                     <td class="text-center"><?php echo $name ?><a

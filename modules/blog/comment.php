@@ -5,7 +5,7 @@ $listComment = getRaw('select * from comments where parent_id = 0 and status=1 a
 
 
 
-$listId = getRaw("select id from comments where parent_id = 0 and status = 1");
+$listId = getRaw("select id from comments where blog_id = $id and parent_id = 0 and status = 1");
 $n_comment = countCommnent($listId,count($listId));
 
 

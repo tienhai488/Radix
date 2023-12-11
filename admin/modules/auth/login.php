@@ -87,7 +87,8 @@ $email = getFlashData('email');
         <form action="" method="post">
             <div class="form-group">
                 <label for="">Email</label>
-                <input type="email" name="email" class="form-control" placeholder="Địa chỉ email..." value="<?php echo !empty($email)? $email : false ?>">
+                <input type="email" name="email" class="form-control" placeholder="Địa chỉ email..."
+                    value="<?php echo !empty($email)? $email : false ?>">
             </div>
 
             <div class="form-group">

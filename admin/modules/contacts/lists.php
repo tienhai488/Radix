@@ -77,67 +77,75 @@ $msg_type = getFlashData('msg_type');
 
 ?>
 
-    <section class="content">
-        <div class="container-fluid">
-            <?php
+<section class="content">
+    <div class="container-fluid">
+        <?php
             getMsg($msg,$msg_type); 
             ?>
-            <a href="<?php echo getLinkAdmin('contacts','add') ?>" class="btn btn-primary"><i class="fa fa-plus"></i>Thêm liên hệ</a>
-            <hr>
-            <form action="" method="GET">
-                <div class="row">
-                    <input type="hidden" name="module" value="contacts">
-                    <div class="col-2">
-                        <div class="form-group">
-                            <select name="status" class="form-control">
-                                <option value="0">Chọn trạng thái</option>
-                                <option value="1" <?php echo !empty($status) && $status == 1 ? "selected" : False ?>>Chưa xử lý</option>
-                                <option value="2" <?php echo !empty($status) && $status == 2 ? "selected" : False ?>>Đang xử lý</option>
-                                <option value="3" <?php echo !empty($status) && $status == 3 ? "selected" : False ?>>Đã xử lý</option>
-                            </select>
-                        </div>
+        <a href="<?php echo getLinkAdmin('contacts','add') ?>" class="btn btn-primary"><i class="fa fa-plus"></i>Thêm
+            liên hệ</a>
+        <hr>
+        <form action="" method="GET">
+            <div class="row">
+                <input type="hidden" name="module" value="contacts">
+                <div class="col-2">
+                    <div class="form-group">
+                        <select name="status" class="form-control">
+                            <option value="0">Chọn trạng thái</option>
+                            <option value="1" <?php echo !empty($status) && $status == 1 ? "selected" : False ?>>Chưa xử
+                                lý</option>
+                            <option value="2" <?php echo !empty($status) && $status == 2 ? "selected" : False ?>>Đang xử
+                                lý</option>
+                            <option value="3" <?php echo !empty($status) && $status == 3 ? "selected" : False ?>>Đã xử
+                                lý</option>
+                        </select>
                     </div>
-                    <div class="col-2">
-                        <div class="form-group">
-                            <select name="group_id" class="form-control">
-                                <option value="0">Chọn phòng ban</option>
-                                <?php 
+                </div>
+                <div class="col-2">
+                    <div class="form-group">
+                        <select name="group_id" class="form-control">
+                            <option value="0">Chọn phòng ban</option>
+                            <?php 
                                 $groups = getRaw("select id,name from `contact_type`");
                                 foreach ($groups as $item) {
                                     ?>
-                                    <option <?php echo !empty($group_id) && $group_id == $item['id'] ? "selected" : False ?> value="<?php echo $item['id'] ?>" ><?php echo $item['name'] ?></option>
-                                    <?php
+                            <option <?php echo !empty($group_id) && $group_id == $item['id'] ? "selected" : False ?>
+                                value="<?php echo $item['id'] ?>"><?php echo $item['name'] ?></option>
+                            <?php
                                 }
                                 ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-5">
-                        <input type="search" class="form-control" name="keyword" placeholder="Nhập vào tên nhóm cần tìm kiếm.." value="<?php echo !empty($keywordSql) ? $keywordSql : false ?>">
-                    </div>
-                    <div class="col-3">
-                         <button type="submit" class="btn btn-primary btn-block">Tìm kiếm</button>
+                        </select>
                     </div>
                 </div>
-            </form>
-            <hr>
-           <table class="table table-bordered">
+                <div class="col-5">
+                    <input type="search" class="form-control" name="keyword"
+                        placeholder="Nhập vào tên người gửi cần tìm kiếm.."
+                        value="<?php echo !empty($keywordSql) ? $keywordSql : false ?>">
+                </div>
+                <div class="col-3">
+                    <button type="submit" class="btn btn-primary btn-block">Tìm kiếm</button>
+                </div>
+            </div>
+        </form>
+        <hr>
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th class="text-center" width="5%">STT</th>
-                    <th class="text-center" width="15%">Tên liên hệ</th>
-                    <th class="text-center" width="15%">Email</th>
-                    <th class="text-center" width="15%">Phòng ban</th>
-                    <th class="text-center" width="15%">Thời gian</th>
-                    <th class="text-center" width="15%">Trạng thái</th>
-                    <th class="text-center" width="10%">Sửa</th>
-                    <th class="text-center" width="10%">Xóa</th>
+                    <th class="text-center" width="20%">Thông tin</th>
+                    <th class="text-center">Nội dung</th>
+                    <th class="text-center">Ghi chú</th>
+                    <th class="text-center" width="10%">Phòng ban</th>
+                    <th class="text-center" width="10%">Thời gian</th>
+                    <th class="text-center" width="10%">Trạng thái</th>
+                    <th class="text-center" width="5%">Sửa</th>
+                    <th class="text-center" width="5%">Xóa</th>
                 </tr>
             </thead>
             <tbody>
-            <?php
+                <?php
                 $index = ($page - 1) * $perPage;
-                $contacts = getRaw("select * from `contacts` $filter ORDER BY update_at desc limit $index,$perPage");
+                $contacts = getRaw("select * from `contacts` $filter ORDER BY create_at desc limit $index,$perPage");
                 
                 $n = count($contacts);
                 for ($index = 1; $index <= $n; $index++) {
@@ -150,15 +158,20 @@ $msg_type = getFlashData('msg_type');
 
                     $fullname = $user['fullname'];
                     $email = $user['email'];
+                    $message = $user['message'];
+                    $note = $user['note'];
                     $status = $user['status'];
-                    $date_time = empty($user['update_at'])? $user['create_at'] : $user['update_at'];
+                    $date_time = $user['create_at'];
                     $create_at = getDateFormat($date_time ,'d/m/Y H:i:s');
             ?>
                 <tr>
                     <td class="text-center"><?php echo $index ?></td>
-                    <td class="text-center"><?php echo $fullname ?><a href="<?php echo getLinkAdmin('contacts','duplicate',['id'=>$id])  ?>" class="btn btn-danger btn-sm" style="padding: 0 5px;margin-left: 8px;" >Nhân bản</a></td>
-                    <td class="text-center"><?php echo $email ?></td>
-                    <td class="text-center"><?php echo $name_group ?></td></td>
+                    <td class="text-center"><?php echo "Name : <strong>$fullname</strong> <br/>";
+                        echo "Email : <strong>$email</strong> <br/>"; ?></td>
+                    <td class="text-center"><?php echo html_entity_decode($message) ?></td>
+                    <td class="text-center"><?php echo html_entity_decode($note) ?></td>
+                    <td class="text-center"><?php echo ($name_group) ?></td>
+                    </td>
                     <td class="text-center"><?php echo $create_at  ?></td>
                     <td class="text-center"><a href="" class="btn <?php
                     if($status==0){
@@ -177,10 +190,13 @@ $msg_type = getFlashData('msg_type');
                         echo "Đã xử lý";
                     }
                     ?></a></td>
-                    <td class="text-center"><a href="<?php echo getLinkAdmin('contacts','update',['id'=>$id]) ?>" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Sửa</a></td>
-                    <td class="text-center"><a href="<?php echo getLinkAdmin('contacts','delete',['id'=>$id]) ?>" onclick="return confirm('Bạn có thật sự muốn xóa!') " class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Xóa</a></td>
+                    <td class="text-center"><a href="<?php echo getLinkAdmin('contacts','update',['id'=>$id]) ?>"
+                            class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> </a></td>
+                    <td class="text-center"><a href="<?php echo getLinkAdmin('contacts','delete',['id'=>$id]) ?>"
+                            onclick="return confirm('Bạn có thật sự muốn xóa!') " class="btn btn-danger btn-sm"><i
+                                class="fa fa-trash"></i> </a></td>
                 </tr>
-            <?php 
+                <?php 
                 }
                 if($n == 0){
                     if ($n == 0) {
@@ -190,16 +206,17 @@ $msg_type = getFlashData('msg_type');
                 }
             ?>
             </tbody>
-           </table>
+        </table>
 
-           <br>
+        <br>
 
-           <nav aria-label="Page navigation example" class="d-flex justify-content-end" style="display: <?php echo $rows > 0 ? "block" : "none" ?>;">
-        <ul class="pagination pagination-sm">
-            <li class="page-item"><a class="page-link"
-                    href="?module=contacts&<?php echo $queryStr ?>&page=<?php echo $page > 1 ? $page -= 1 : $page ?>">Previous</a>
-            </li>
-            <?php
+        <nav aria-label="Page navigation example" class="d-flex justify-content-end"
+            style="display: <?php echo $rows > 0 ? "block" : "none" ?>;">
+            <ul class="pagination pagination-sm">
+                <li class="page-item"><a class="page-link"
+                        href="?module=contacts&<?php echo $queryStr ?>&page=<?php echo $page > 1 ? $page -= 1 : $page ?>">Previous</a>
+                </li>
+                <?php
             $start = $page - 2;
             if ($start < 1) {
                 $start = 1;
@@ -216,28 +233,28 @@ $msg_type = getFlashData('msg_type');
                 $link = _WEB_HOST_ROOT_ADMIN."/?module=contacts&$queryStr&page=$i";
 
             ?>
-            <li class='<?php
+                <li class='<?php
                             $active = 1;
                             if (!empty(getBody()['page'])) {
                                 $active = getBody()['page'];
                             }
                             echo $active == $i ? 'page-item active' : 'page-item' ?>'><a class="page-link"
-                    href="<?php echo $link ?>"> <?php echo $i ?></a>
-            </li>
-            <?php
+                        href="<?php echo $link ?>"> <?php echo $i ?></a>
+                </li>
+                <?php
             }
             ?>
-            <li class="page-item"><a class="page-link"
-                    href="?module=contacts&<?php echo $queryStr ?>&page=<?php $index =  empty(getBody()['page']) ? 2 : getBody()['page'] + 1;
+                <li class="page-item"><a class="page-link"
+                        href="?module=contacts&<?php echo $queryStr ?>&page=<?php $index =  empty(getBody()['page']) ? 2 : getBody()['page'] + 1;
                                                                                             echo ($index > $maxpage) ? $maxpage : $index; ?>">Next</a>
-            </li>
-        </ul>
-    </nav>
+                </li>
+            </ul>
+        </nav>
 
-        </div>
-    </section>
-    <!-- /.content -->
-  
+    </div>
+</section>
+<!-- /.content -->
+
 <?php
 layout('footer','admin',$data);
 ?>

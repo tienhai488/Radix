@@ -59,19 +59,30 @@ $config['images'] = array(
         'large'  => array('width' => 800, 'height' => 600, 'quality' => 80)
     )
 );
+// $web_root = $_SERVER['HTTP_HOST'];
 
+// $temp = str_replace("\\","/",PATH_ROOT);
+
+// $temp2 = str_replace(strtolower($_SERVER['DOCUMENT_ROOT']),"",strtolower($temp)) ;
+
+// if(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on'){
+//     define("HOST_ROOT","https://$web_root$temp2");
+// }else{
+//     define("HOST_ROOT","http://$web_root$temp2");
+// }
 /*=================================== Backends ========================================*/
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_backends
-
 $config['backends'][] = array(
     'name'         => 'default',
     'adapter'      => 'local',
-    'baseUrl'      => 'http://localhost:81/PHP/module06/radix/uploads',
-//  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
+    'baseUrl'      => HOST_ROOT.'/uploads',
+    //    'baseUrl'      => 'http://localhost:81/PHP/mvc_training/uploads',
+    //  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
     'chmodFiles'   => 0777,
     'chmodFolders' => 0755,
     'filesystemEncoding' => 'UTF-8',
 );
+
 
 /*================================ Resource Types =====================================*/
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_resourceTypes

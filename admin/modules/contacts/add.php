@@ -64,7 +64,6 @@ if (isPost()) {
             "status" => $status - 1,
             "type_id" => $type_id,
             "create_at" => date("Y-m-d H:i:s"),
-            "update_at" => date("Y-m-d H:i:s"),
         ];
         $result = insert("contacts", $dataInsert);
         if ($result) {
@@ -97,18 +96,20 @@ echo "</pre>";
 ?>
 <div style="max-width: 1200px;margin:0 auto; ">
     <?php getMsg($msg, $msg_type); ?>
-    <form  method="POST">
+    <form method="POST">
         <div class="form-group">
             <label for="">Tên liên hệ</label>
-            <input type="text" name="fullname" placeholder="Tên liên hệ..." class="form-control name-service" value="<?php getValueInput($data, 'fullname') ?>">
+            <input type="text" name="fullname" placeholder="Tên liên hệ..." class="form-control name-service"
+                value="<?php getValueInput($data, 'fullname') ?>">
             <?php getMsgErr($errs, 'fullname') ?>
         </div>
         <div class="form-group">
             <label for="">Email</label>
-            <input type="text" name="email" placeholder="Email..." class="form-control name-service" value="<?php getValueInput($data, 'email') ?>">
+            <input type="text" name="email" placeholder="Email..." class="form-control name-service"
+                value="<?php getValueInput($data, 'email') ?>">
             <?php getMsgErr($errs, 'email') ?>
         </div>
-       
+
         <div class="form-group">
             <label for="">Phòng ban</label>
             <select name="type_id" class="form-control">
@@ -121,8 +122,9 @@ echo "</pre>";
                 }
                 foreach ($cates as $item) {
                     ?>
-                    <option <?php echo !empty($category_id) && $category_id == $item['id'] ? "selected" : False ?> value="<?php echo $item['id'] ?>" ><?php echo $item['name'] ?></option>
-                    <?php
+                <option <?php echo !empty($category_id) && $category_id == $item['id'] ? "selected" : False ?>
+                    value="<?php echo $item['id'] ?>"><?php echo $item['name'] ?></option>
+                <?php
                 }
                 ?>
             </select>
@@ -131,7 +133,8 @@ echo "</pre>";
 
         <div class="form-group">
             <label for="">Message</label>
-            <textarea class="editor" class="form-control" placeholder="Message..." name="message" ><?php getValueInput($data, 'message') ?></textarea>
+            <textarea class="editor" class="form-control" placeholder="Message..."
+                name="message"><?php getValueInput($data, 'message') ?></textarea>
             <?php getMsgErr($errs, 'message') ?>
         </div>
 
@@ -139,19 +142,23 @@ echo "</pre>";
             <label for="">Trạng thái</label>
             <select name="status" class="form-control">
                 <option value="0">Chọn trạng thái</option>
-                <option value="1" <?php echo !empty($data['status']) && $data['status'] == 1 ? "selected" : False ?>>Chưa xử lý</option>
-                <option value="2" <?php echo !empty($data['status']) && $data['status'] == 2 ? "selected" : False ?>>Đang xử lý</option>
-                <option value="3" <?php echo !empty($data['status']) && $data['status'] == 3 ? "selected" : False ?>>Đã xử lý</option>
+                <option value="1" <?php echo !empty($data['status']) && $data['status'] == 1 ? "selected" : False ?>>
+                    Chưa xử lý</option>
+                <option value="2" <?php echo !empty($data['status']) && $data['status'] == 2 ? "selected" : False ?>>
+                    Đang xử lý</option>
+                <option value="3" <?php echo !empty($data['status']) && $data['status'] == 3 ? "selected" : False ?>>Đã
+                    xử lý</option>
             </select>
             <?php getMsgErr($errs, 'status') ?>
         </div>
 
         <div class="form-group">
             <label for="">Note</label>
-            <textarea class="editor" class="form-control" placeholder="Note..." name="note" ><?php getValueInput($data, 'note') ?></textarea>
+            <textarea class="editor" class="form-control" placeholder="Note..."
+                name="note"><?php getValueInput($data, 'note') ?></textarea>
             <?php getMsgErr($errs, 'note') ?>
         </div>
-            
+
         <button type="submit" class="btn btn-primary">Thêm liên hệ</button>
         <p><a href="?module=contacts">Quay lại</a></p>
 
