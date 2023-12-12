@@ -4,15 +4,14 @@
 ## Ngôn ngữ và Kỹ năng
 
 Dưới đây là một số ngôn ngữ lập trình và kỹ năng mà tôi đã dùng để phát triển dự án:
-
+- **Ngôn ngữ lập trình:**
+  - PHP
+  - JavaScript
+    
 - **Front-end:**
   - HTML
   - CSS
-  - JS
   - Bootstrap
-
-- **Back-end:**
-  - PHP
 
 - **Cơ sở dữ liệu:**
   - MySQL
